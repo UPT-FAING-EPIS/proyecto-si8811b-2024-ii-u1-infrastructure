@@ -9,9 +9,7 @@ module "storage" {
   container_name = var.container_name
   location = var.location
 }
-module "infratest"{
-  source = "./infracost_test.tf"
-}
+
 module "service_plan" {
   source = "./modules/service_plan"
   app_service_plan_name = var.app_service_plan_name
