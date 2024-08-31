@@ -1,0 +1,36 @@
+name: Setup Azure Resources for Terraform Backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Resource Group
+        run: |
+          az group create --name my-resource-group --location eastus
+
+      - name: Create Storage Account
+        run: |
+          az storage account create \
+            --name mystorageaccount \
+            --resource-group my-resource-group \
+            --location eastus \
+            --sku Standard_LRS \
+            --kind StorageV2
+
+      - name: Create Blob Container
+        run: |
+          az storage container create \
+            --name terraform-state \
+            --account-name mystorageaccount
