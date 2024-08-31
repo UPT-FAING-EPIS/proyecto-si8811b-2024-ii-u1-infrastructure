@@ -1,0 +1,15 @@
+resource_group_name     =
+location                =
+storage_account_name    =
+container_name          =
+
+mongo_db_name           =
+influx_db_name          =
+admin_user              =
+admin_password          =
+
+app_service_plan_name   =
+function_app_1_name     =
+function_app_2_name     =
+web_app_1_name          =
+web_app_2_name          =
