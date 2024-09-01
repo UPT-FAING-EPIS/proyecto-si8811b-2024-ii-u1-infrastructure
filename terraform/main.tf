@@ -11,17 +11,9 @@ module "storage" {
   location = var.location
 }
 
-module "cosmosdb" {
-  source = "./modules/cosmosdb"
+module "mongodb" {
+  source = "./modules/mongodb"
   mongo_db_name = var.mongo_db_name
-  location = var.location
-}
-
-module "postgresql" {
-  source = "./modules/postgresql"
-  influx_db_name = var.influx_db_name
-  admin_user = var.admin_user
-  admin_password = var.admin_password
   location = var.location
 }
 
@@ -31,12 +23,12 @@ module "service_plan" {
   location = var.location
 }
 
-module "functions" {
-  source = "./modules/functions"
-  function_app_1_name = var.function_app_1_name
-  function_app_2_name = var.function_app_2_name
-  location = var.location
-}
+# module "functions" {
+#   source = "./modules/functions"
+#   function_app_1_name = var.function_app_1_name
+#   function_app_2_name = var.function_app_2_name
+#   location = var.location
+# }
 
 module "web_apps" {
   source = "./modules/web_apps"
