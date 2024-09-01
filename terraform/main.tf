@@ -23,12 +23,12 @@ module "service_plan" {
   location = var.location
 }
 
-module "functions" {
-  source = "./modules/functions"
-  function_app_1_name = var.function_app_1_name
-  function_app_2_name = var.function_app_2_name
-  location = var.location
-}
+# module "functions" {
+#   source = "./modules/functions"
+#   function_app_1_name = var.function_app_1_name
+#   function_app_2_name = var.function_app_2_name
+#   location = var.location
+# }
 
 module "web_apps" {
   source = "./modules/web_apps"
