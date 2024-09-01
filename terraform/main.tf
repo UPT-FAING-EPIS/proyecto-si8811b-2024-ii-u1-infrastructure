@@ -11,8 +11,8 @@ module "storage" {
   location = var.location
 }
 
-module "cosmosdb" {
-  source = "./modules/cosmosdb"
+module "mongodb" {
+  source = "./modules/mongodb"
   mongo_db_name = var.mongo_db_name
   location = var.location
 }
