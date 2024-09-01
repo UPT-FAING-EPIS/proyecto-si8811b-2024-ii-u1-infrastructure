@@ -1,7 +1,7 @@
 resource "azurerm_cosmosdb_account" "mongo" {
   name                = var.mongo_db_name
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = var.resource_group_name
+  location            = var.location
   offer_type          = "Standard"
   kind                = "MongoDB"
 
@@ -17,6 +17,4 @@ resource "azurerm_cosmosdb_account" "mongo" {
   consistency_policy {
     consistency_level = "Session"
   }
-
-  depends_on = [azurerm_resource_group.main]
 }
