@@ -1,0 +1,66 @@
+name: 'Terraform Deployment'
+
+on:
+  workflow_dispatch:
+    inputs:
+      mongo_db_name:
+        description: 'Name of the MongoDB database'
+        required: true
+      web_app_1_name:
+        description: 'Name of the first Web App'
+        required: true
+      web_app_2_name:
+        description: 'Name of the second Web App'
+        required: true
+      app_service_plan_name:
+        description: 'Name of the App Service Plan'
+        required: true
+      location:
+        description: 'Resources Location'
+        required: true
+      resource_group_name:
+        description: 'Name of the Resource Group'
+        required: true
+      storage_account_name:
+        description: 'Name of the Storage Account'
+        required: true
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          TF_VAR_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          TF_VAR_resource_group_name: ${{ github.event.inputs.resource_group_name }}
+          TF_VAR_location: ${{ github.event.inputs.location }}
+          TF_VAR_mongo_db_name: ${{ github.event.inputs.mongo_db_name }}
+          TF_VAR_admin_user: ${{ secrets.ADMIN_USER }}
+          TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
+          TF_VAR_app_service_plan_name: ${{ github.event.inputs.app_service_plan_name }}
+          TF_VAR_web_app_1_name: ${{ github.event.inputs.web_app_1_name }}
+          TF_VAR_web_app_2_name: ${{ github.event.inputs.web_app_2_name }}
+          TF_VAR_storage_account_name: ${{ github.event.inputs.storage_account_name }}
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./terraform
+        run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
