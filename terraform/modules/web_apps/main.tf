@@ -7,6 +7,10 @@ resource "azurerm_linux_web_app" "webapp1" {
   site_config {
     always_on = false
   }
+  tags = {
+    Service     = "Web App"
+    Environment = "Dev"
+  }
 }
 
 resource "azurerm_linux_web_app" "webapp2" {
@@ -17,5 +21,9 @@ resource "azurerm_linux_web_app" "webapp2" {
 
   site_config {
     always_on = false
+  }
+  tags = {
+    Service     = "Web App"
+    Environment = "Dev"
   }
 }

@@ -4,4 +4,9 @@ resource "azurerm_service_plan" "main" {
   resource_group_name = var.resource_group_name
   sku_name            = "F1"
   os_type             = "Linux"
+
+  tags = {
+    Service = "Service Plan"
+    Environment = "Dev"
+  }
 }

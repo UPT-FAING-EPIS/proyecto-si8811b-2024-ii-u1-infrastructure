@@ -5,6 +5,11 @@ resource "azurerm_cosmosdb_account" "mongo" {
   offer_type          = "Standard"
   kind                = "MongoDB"
 
+  tags = {
+    Service = "MongoDB"
+    Environment = "Dev"
+  }
+
   capabilities {
     name = "EnableMongo"
   }
