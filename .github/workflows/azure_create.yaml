@@ -2,6 +2,10 @@ name: Setup Azure Resources for Terraform Backend
 
 on:
   workflow_dispatch:
+    inputs:
+      location:
+        description: 'Resources Location'
+        required: true
 
 jobs:
   setup-backend:
@@ -18,14 +22,14 @@ jobs:
 
       - name: Create Resource Group
         run: |
-          az group create --name topicos-backend-group --location eastus
+          az group create --name topicos-backend-group --location ${{github.event.inputs.location}}
 
       - name: Create Storage Account
         run: |
           az storage account create \
             --name topicosbackendaccount \
             --resource-group topicos-backend-group \
-            --location eastus \
+            --location ${{github.event.inputs.location}} \
             --sku Standard_LRS \
             --kind StorageV2
 
