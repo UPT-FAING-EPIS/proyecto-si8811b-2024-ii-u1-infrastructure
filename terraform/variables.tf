@@ -9,6 +9,11 @@ variable "location" {
   default     = "East US"
 }
 
+variable "subscription_id" {
+  description = "The Azure subscription ID"
+  type        = string
+}
+
 variable "storage_account_name" {
   description = "The name of the Storage Account"
   type        = string
@@ -23,12 +28,6 @@ variable "mongo_db_name" {
   description = "The name of the MongoDB (CosmosDB)"
   type        = string
 }
-
-variable "influx_db_name" {
-  description = "The name of the InfluxDb (PostgreSQL)"
-  type        = string
-}
-
 variable "admin_user" {
   description = "The administrator username for the PostgreSQL server"
   type        = string
@@ -42,16 +41,6 @@ variable "admin_password" {
 
 variable "app_service_plan_name" {
   description = "The name of the App Service Plan"
-  type        = string
-}
-
-variable "function_app_1_name" {
-  description = "The name of the first Azure Function"
-  type        = string
-}
-
-variable "function_app_2_name" {
-  description = "The name of the second Azure Function"
   type        = string
 }
 
