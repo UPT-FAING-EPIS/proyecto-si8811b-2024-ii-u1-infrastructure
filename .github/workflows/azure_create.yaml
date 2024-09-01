@@ -18,13 +18,13 @@ jobs:
 
       - name: Create Resource Group
         run: |
-          az group create --name my-resource-group --location eastus
+          az group create --name topicos-backend-group --location eastus
 
       - name: Create Storage Account
         run: |
           az storage account create \
-            --name mystorageaccount \
-            --resource-group my-resource-group \
+            --name topicosbackendaccount \
+            --resource-group topicos-backend-group \
             --location eastus \
             --sku Standard_LRS \
             --kind StorageV2
@@ -33,4 +33,4 @@ jobs:
         run: |
           az storage container create \
             --name terraform-state \
-            --account-name mystorageaccount
+            --account-name topicosbackendaccount
