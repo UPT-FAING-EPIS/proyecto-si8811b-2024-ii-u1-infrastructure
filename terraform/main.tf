@@ -17,14 +17,6 @@ module "mongodb" {
   location = var.location
 }
 
-module "postgresql" {
-  source = "./modules/postgresql"
-  influx_db_name = var.influx_db_name
-  admin_user = var.admin_user
-  admin_password = var.admin_password
-  location = var.location
-}
-
 module "service_plan" {
   source = "./modules/service_plan"
   app_service_plan_name = var.app_service_plan_name
